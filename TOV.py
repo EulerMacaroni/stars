@@ -11,12 +11,6 @@ def TOV(P,rho):
     def dm_dr(r,M):
         return (4)*(np.pi)*(r**2)*rho_0
 
-    # def dP_dr(r,P):
-    #     k1 = -1*(P+rho_0)
-    #     k2 = mstep+4*np.pi*(r**3)*P
-    #     k3 = r*(r-2*mstep)
-    #     return (k1)*(k2/k3)
-
     def dP_dr(r,P):
         k  = (mstep*rho_0)/(r**2)
         k1 = 1 + (P/rho_0)
@@ -30,20 +24,20 @@ def TOV(P,rho):
     rho_0 = rho 
     P0 = P
     
-    r_new = 1e-4 
+    r_new = 1e-6 
     m0 = eps
     
     # # solving Mass and Pressure differential equations
 
-    P_array = np.array([])
-    r_array = np.array([])
-    m_array = np.array([])
+    P_array  = np.array([])
+    r_array  = np.array([])
+    m_array  = np.array([])
     m_tarray = np.array([])
     ex_array = np.array([])
 
     while True:
     
-        t_span = [r_new,(1.01)*r_new]
+        t_span = [r_new,(1.001)*r_new]
         # t_span = [r_new+eps]
         
         m = odeint(dm_dr,m0,t_span,tfirst=True)
@@ -60,7 +54,7 @@ def TOV(P,rho):
             print('Star found with R= ',R,'& M=',M, 'Compactness(R/M > 2.25) = ', (R)/(M))
             break
 
-        r_new += 1e-4
+        r_new += 1e-6   
     
         P0 = Pressure[-1]
         m0 = m[-1]
