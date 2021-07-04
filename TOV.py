@@ -43,12 +43,10 @@ def TOV(P,rho):
         mstep = m[-1]
 
         Pressure = odeint(dP_dr,P0,t_span,tfirst=True)
-
         
         P_array = np.append(P_array,Pressure[-1])
         r_array = np.append(r_array,t_span[-1])
         m_array = np.append(m_array,m[-1])
-        
         
         if Pressure[-1] <= 1e-10:
             R = r_array[-1]
@@ -56,7 +54,6 @@ def TOV(P,rho):
             print('Star found with R= ',R,'& M=',M, 'Compactness(R/M > 2.25) = ', (R)/(M))
             break
         
-
         t_span = np.linspace(r_array[-1],1e-4+r_array[-1],10)
     
         P0 = Pressure[-1]
