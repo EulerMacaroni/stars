@@ -27,7 +27,7 @@ fig, ax1 = plt.subplots()
 color = 'tab:red'
 ax1.set_xlabel('Radius $r$')
 ax1.set_ylabel('Pressure $P$', color=color)
-plt.yscale('log')
+# plt.yscale('log')
 ax1.plot(r_arr, P, color='green')
 ax1.plot(r_arr, ExactP, color=color,linestyle = 'dashed')
 ax1.legend(['Numerical P(r)','Analytical P(r)'])
