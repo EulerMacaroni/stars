@@ -6,7 +6,7 @@ from TOV2step import TOVstep
 
 eps = np.finfo(float).eps
 P = np.linspace(1e1,1e15,10)
-rho = 90000+2000         
+rho = 5000         
 R1   = np.array([])
 R2   = np.array([])
 M1   = np.array([])
