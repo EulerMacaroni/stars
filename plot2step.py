@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 from functions import rel, mass
 from TOV2step import TOVstep
 
-rho = 10e6
-P0 = 10e8
+rho = 1
+P0 = 1
 
 sol = TOVstep(P0,rho)
 
