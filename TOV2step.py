@@ -58,7 +58,7 @@ def TOVstep(P,rho):
         if Pressure[-1] <= 1e-10:
             R = r_array[-1]
             M = m_array[-1]
-            print('Star found with R= ',R,'& M=',M, 'Compactness(R/M > 2.25) = ', (R)/(M))
+            print('Star found with R= ',R,'& M=',M, 'Compactness(R/M > 2.25) = ', (R)/(M),'(2 Step Profile)')
             break
         
         t_span = np.linspace(r_array[-1],1e-5+r_array[-1],10)
