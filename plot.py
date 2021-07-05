@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from functions import rel, mass
 from TOV import TOV
 
-rho = 1
+rho = 10
 P0 = 1
 
 sol = TOV(P0,rho)
@@ -39,7 +39,7 @@ ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
 color = 'tab:blue'
 ax2.set_ylabel('Mass $M$', color=color)  # we already handled the x-label with ax1
 ax2.plot(r_arr, m_arr, color=color)
-ax2.plot(r_arr, ExactM, color='green',linestyle = 'dashed')
+ax2.plot(r_arr, ExactM, color='darkviolet',linestyle = 'dashed')
 ax2.legend(['Numerical m(r)','Analytical m(r)'])
 
 
