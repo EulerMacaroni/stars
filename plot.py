@@ -3,7 +3,7 @@ from numpy.core.function_base import linspace
 import matplotlib.pyplot as plt
 from EoSTOV import TOVEOS
 
-m_r_array = linspace(1e-8, 4/9 - 1e-5, num = 8)
+m_r_array = linspace(1e-8, 4/9 - 1e-5, num = 25)
 rho = 100
 R_array = []
 M_array = []
