@@ -26,7 +26,6 @@ def y0(m_r,rho_0):
 # converstion energy density (SI --> Geom.)
 
 def convED(rho_0):
-    # return (rho_0*(1.2102*(10**44))*(6.6743*(10**-11)))/((2.9979*(10**8))**4)
     return (rho_0*(6.6743*(10**-11)))/((2.9979*(10**8))**4)
 
 # converstion mass (SI --> Geom.)

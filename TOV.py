@@ -1,11 +1,9 @@
-from ast import Param
 import numpy as np
 from scipy.integrate import solve_ivp
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
 from functions import rel, mass, y0
 
-# single density profile TOV solver
 
 def TOV(m_r,rho,tau):
 
@@ -39,8 +37,6 @@ def TOV(m_r,rho,tau):
     P_array  = np.array([])
     r_array  = np.array([])
     m_array  = np.array([])
-    m_tarray = np.array([])
-    ex_array = np.array([])
 
     while True:
     
