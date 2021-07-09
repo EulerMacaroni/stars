@@ -4,9 +4,9 @@ from functions import rel, mass
 from TOV2step import TOVstep
 
 rho = 1
-P0 = 1
-
-sol = TOVstep(P0,rho)
+M_R = 0.3
+tau = 1e-5
+sol = TOVstep(M_R,rho,tau)
 
 R = sol[0]
 M = sol[1]
@@ -14,11 +14,7 @@ r_arr = sol[2]
 
 m_arr = sol[4]
 P = sol[3]
-M2 = mass(R,rho)
 
-
-# ExactP =  rel(r_arr,R,M,rho)
-# ExactM = mass(r_arr,rho)
 
 fig, ax1 = plt.subplots()
 

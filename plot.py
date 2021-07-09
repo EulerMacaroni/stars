@@ -2,18 +2,20 @@ import numpy as np
 from scipy.integrate import solve_ivp
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
-from functions import rel, mass
+from functions import rel, mass, convED,convP
 from TOV import TOV
 
-rho = 10
-P0 = 1
+eps = np.finfo(float).eps
 
-sol = TOV(P0,rho)
+rho = 1e5
+m_r = (4/9)-0.001
+tau = 1e-7
+sol = TOV(m_r,rho,tau)
 
 R = sol[0]
 M = sol[1]
 r_arr = sol[2]
-
+print(len(r_arr))
 m_arr = sol[4]
 P = sol[3]
 M2 = mass(R,rho)
@@ -21,7 +23,6 @@ M2 = mass(R,rho)
 
 ExactP =  rel(r_arr,R,M,rho)
 ExactM = mass(r_arr,rho)
-
 fig, ax1 = plt.subplots()
 
 color = 'tab:red'
