@@ -7,8 +7,8 @@ from TOV import TOV
 
 eps = np.finfo(float).eps
 
-rho = 1e5
-m_r = (4/9)-0.001
+rho = 1e3
+m_r = 1
 tau = 1e-7
 sol = TOV(m_r,rho,tau)
 

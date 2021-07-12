@@ -30,7 +30,7 @@ def TOV(m_r,rho,tau):
     
     r_new = 1e-10
     m0 = 0
-    t_span =np.linspace(r_new,tau+r_new,50)
+    t_span =np.linspace(r_new,tau+r_new,75)
     
     # # solving Mass and Pressure differential equations
 
@@ -56,7 +56,7 @@ def TOV(m_r,rho,tau):
             print('Star found with R= ',R,'& M=',M, 'Compactness(R/M > 2.25) = ',(R)/(M),'(1 Step Profile) with',len(r_array),'steps')
             break
         
-        t_span = np.linspace(r_array[-1],tau+r_array[-1],50)
+        t_span = np.linspace(r_array[-1],tau+r_array[-1],75)
     
         P0 = Pressure[-1]
         m0 = m[-1]
