@@ -68,4 +68,3 @@ def TOVstep(m_r,rho,tau):
     M = m[-1]
     compactness = R/M
     return R,M,r_array,P_array,m_array,compactness, r_c,P
-
