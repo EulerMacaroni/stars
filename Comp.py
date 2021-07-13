@@ -5,9 +5,9 @@ from functions import rel, mass
 from TOV2step import TOV2step
 
 eps = np.finfo(float).eps
-P0 = np.linspace(1e2,1e7,100)
+P0 = np.linspace(1,1e5,500)
 
-rho = 1e3       
+rho = 1e3
 tau = 1e-5
 
 R1   = np.array([])
