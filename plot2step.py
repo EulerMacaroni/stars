@@ -1,12 +1,12 @@
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
 from functions import rel, mass
-from TOV2step import TOVstep
+from TOV2step import TOV2step
 
-rho = 1
-M_R = 0.3
+rho = 1e5
+P0 = 1e8
 tau = 1e-5
-sol = TOVstep(M_R,rho,tau)
+sol = TOV2step(P0,rho,tau)
 
 R = sol[0]
 M = sol[1]
@@ -37,8 +37,8 @@ ax2.plot(r_arr, m_arr, color=color)
 ax2.legend(['Numerical m(r)','Analytical m(r)'])
 
 
-ax2.tick_params(axis='y', labelcolor=color)
-plt.axvline(x=sol[6],color='green',linestyle = 'dashed')
+# ax2.tick_params(axis='y', labelcolor=color)
+# plt.axvline(x=sol[6],color='green',linestyle = 'dashed')
 
 fig.tight_layout()  # otherwise the right y-label is slightly clipped
 plt.show()
