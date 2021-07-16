@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate.odepack import odeint
@@ -6,7 +5,7 @@ from functions import EosP, EosRho
 from scipy.interpolate import interp1d
 from scipy.integrate import quad
 
-class EoS():
+class EoSclass():
     
     eps = np.finfo(float).eps
     
@@ -20,15 +19,3 @@ class EoS():
         b =quad(EosRho,kmin,kmax[i]) 
         EoSP = np.append(EoSP,a[0])
         EoSrho = np.append(EoSrho,b[0])
-
-
-
-# Plot of pressure vs rho 
-
-plt.loglog(EoS.EoSrho,EoS.EoSP)
-plt.xlabel('$\epsilon$')
-plt.ylabel('$P$')
-plt.title('Pressure vs Density')
-plt.legend(['Pressure'])
-plt.show()
-
