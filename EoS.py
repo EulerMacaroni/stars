@@ -27,8 +27,8 @@ class EoS():
 
 plt.loglog(EoS.EoSrho,EoS.EoSP)
 plt.xlabel('$\epsilon$')
-plt.ylabek('$P$')
-plt.title('pressure vs density')
+plt.ylabel('$P$')
+plt.title('Pressure vs Density')
 plt.legend(['Pressure'])
 plt.show()
 
