@@ -1,3 +1,7 @@
 __pycache__/functions.cpython-39.pyc
 __pycache__/TOV.cpython-39.pyc
 __pycache__/TOV2step.cpython-39.pyc
+EoS.pyc
+.gitignore
+__pycache__/EoS.cpython-39.pyc
+functions.pyc

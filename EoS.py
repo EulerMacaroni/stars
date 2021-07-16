@@ -10,7 +10,7 @@ class EoSclass():
     eps = np.finfo(float).eps
     
     kmin = 1e-8
-    kmax = np.linspace(kmin+eps,5000,10000)
+    kmax = np.linspace(kmin+eps,9000,90000)
 
     EoSrho = np.array([])
     EoSP = np.array([])
