@@ -1,4 +1,5 @@
 import numpy as np
+pi = np.pi
 
 # mass function
 def mass(r,rho_0):
@@ -34,3 +35,14 @@ def convM(M):
 
 def convP(P):
     return (P*(6.6743*(10**-11)))/((2.9979*(10**8))**4)
+
+
+# funtion for equation of state 
+
+def EosRho(k):
+    m_f =1
+    return (1/(pi**2))*(k**2)*(np.sqrt(m_f**2 + k**2))
+    
+def EosP(k):
+    m_f =1
+    return (1/(3*pi**2))*((k**4)/(np.sqrt(m_f**2 + k**2)))
