@@ -52,5 +52,3 @@ def findXPoint(x1,x2,y1,y2,y3):
     m = (x2 - x1)/(y2 - y1)
     x3 = (y3 - y1)*m + x1
     return x3
-
-

@@ -7,24 +7,22 @@ from scipy.interpolate import interp1d
 from EoS import EoSclass
 from functions import rel, mass, y0,findXPoint
 
+E = EoSclass
+
+def rhof(P):
+    i = min(E.EoSP,key=lambda x:abs(x-P)) #find closest value to P0
+    a = np.where(E.EoSP==i) # index of closest point to P0
+    index =a[0][0] #index of closest P0 (a outputs 2 dim. array)
+    
+    x2 = E.EoSrho[index+1]
+    x1 = E.EoSrho[index]
+    y2 = E.EoSP[index+1]
+    y1 = E.EoSP[index]
+
+    x3 = findXPoint(x1,x2,y1,y2,P)
+    return x3
 
 def TOVEoS(P0,tau):
-
-    E = EoSclass
-
-    def rhof(P):
-        i = min(E.EoSP,key=lambda x:abs(x-P)) #find closest value to P0
-        a = np.where(E.EoSP==i) # index of closest point to P0
-        index =a[0][0] #index of closest P0 (a outputs 2 dim. array)
-    
-        x2 = E.EoSrho[index+1]
-        x1 = E.EoSrho[index]
-        y2 = E.EoSP[index+1]
-        y1 = E.EoSP[index]
-
-        x3 = findXPoint(x1,x2,y1,y2,P)
-        return x3
-
 
     def diff(x,r):
         P = x[0]
@@ -87,6 +85,6 @@ def TOVEoS(P0,tau):
     return R1,M1,r_array,P_array,m_array,comp
 
 # TOV test
-# sol = TOVEoS(1e5,1e-4)
+# sol = TOVEoS(1e-5,1e-2)
 # plt.plot(sol[3],sol[2])
 # plt.show()

@@ -4,12 +4,12 @@ from scipy.integrate import odeint
 import matplotlib.pyplot as plt
 from functions import rel, mass, convED,convP
 from TOV import TOV
+from TOVwEoS import rhof
 
 eps = np.finfo(float).eps
-
-rho = 1e3
-P0 = 10e3
-tau = 1e-5
+P0 = 10e5
+rho = 10e3
+tau = 1e-7
 sol = TOV(P0,rho,tau)
 
 R = sol[0]
