@@ -20,6 +20,4 @@ class EoSclass():
         EoSP = np.append(EoSP,a[0])
         EoSrho = np.append(EoSrho,b[0])
 
-
-
-print('min=', min(EoSclass.EoSP),'max=',max(EoSclass.EoSP))
+# print('min=', min(EoSclass.EoSP),'max=',max(EoSclass.EoSP))

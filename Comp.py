@@ -1,3 +1,4 @@
+from matplotlib import colors
 import numpy as np
 import matplotlib.pyplot as plt
 from TOV import TOV
@@ -5,7 +6,7 @@ from functions import rel, mass
 from TOV2step import TOV2step
 
 eps = np.finfo(float).eps
-P0 = np.linspace(1,1e5,500)
+P0 = np.linspace(1,1e5,100,endpoint=True)
 
 rho = 1e3
 tau = 1e-5
@@ -28,18 +29,17 @@ for i in range(len(P0)):
     M1   = np.append(M1,sol1[1])
     M2   = np.append(M2,sol2[1])
 
-
+fig1 = plt.figure(1)
 plt.ylabel('Central Pressure, $P_0$')
 plt.xlabel('R/M')
-plt.xlim([0,5])
+plt.xlim([0,10])
 plt.title('Central Pressure vs R/M with rho = %f'%rho)
 plt.axvline(x=9/4,label='Buchdahl limit',color='green',linestyle = 'dashed')
 plt.plot(r_m1,P0,color='red')
 plt.plot(r_m2,P0,color='black')
 plt.legend(['Buchdahl limit','1 Step Profile','2 Step Profile'])
-plt.show()
 
-
+fig2 = plt.figure(2)
 plt.plot(R1,np.power(r_m1,-1),'.',color= 'red')
 plt.plot(R2,np.power(r_m2,-1),'.',color= 'green')
 plt.axhline(y=4/9,color='green',linestyle = 'dashed')
@@ -48,4 +48,12 @@ plt.xlabel('R')
 plt.ylabel('M/R')
 plt.ylim([0,4/9 +0.1 ])
 plt.grid()
+
+fig3 =plt.figure(3)
+plt.plot(R1,M1,color= 'red')
+plt.plot(R2,M2,color= 'green')
+plt.legend(['1 Step', '2 Step'])
+plt.xlabel('dimensionaless R')
+plt.ylabel('dimensionaless M')
+
 plt.show()
