@@ -56,9 +56,11 @@ def TOVEoS(P0,tau):
         sol = odeint(diff,x0,t_span)
         P = sol[:,0] 
         m = sol[:,1]
-        
-        if (P <= 1e-10).any():
-            index = np.where(P<= 1e-10)
+
+        print(P)
+        limit = 1e-8
+        if (P <= limit).any():
+            index = np.where(P<= limit)
             i = index[0][0]
             if i ==0:
                 R = r_array[-1][-1]
@@ -83,3 +85,8 @@ def TOVEoS(P0,tau):
     comp = compactness
         
     return R1,M1,r_array,P_array,m_array,comp
+
+# TOV test
+# sol = TOVEoS(1e5,1e-4)
+# plt.plot(sol[3],sol[2])
+# plt.show()

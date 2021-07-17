@@ -11,14 +11,14 @@ plt.xlabel('log $\epsilon$')
 plt.ylabel('log $P$')
 plt.title('Pressure vs Density')
 plt.legend(['Pressure vs Densty (EoS)'])
-plt.show()
+# plt.show()
 
 
 
 # pressure vs radius and mass vs radius plots
 
-P0 = 1e3
-sol = TOVEoS(P0,1e-5)
+P0 = 1e-4
+sol = TOVEoS(P0,1e-2)
 P = sol[3]
 r_arr = sol[2]
 m_arr = sol[4]
