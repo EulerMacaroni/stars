@@ -1,22 +1,32 @@
+from warnings import resetwarnings
 import numpy as np
 from scipy.integrate import solve_ivp
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 from EoS import EoSclass
-from functions import rel, mass, y0
+from functions import rel, mass, y0,findXPoint
 
 
-def TOV(P0,tau):
+def TOVEoS(P0,tau):
+
     E = EoSclass
 
     def rhof(P):
-        i = min(E.EoSP,key=lambda x:abs(x-P))
-        a = np.where(E.EoSP==i)
+        i = min(E.EoSP,key=lambda x:abs(x-P)) #find closest value to P0
+        a = np.where(E.EoSP==i) # index of closest point to P0
+        index =a[0][0] #index of closest P0 (a outputs 2 dim. array)
+    
+        x2 = E.EoSrho[index+1]
+        x1 = E.EoSrho[index]
+        y2 = E.EoSP[index+1]
+        y1 = E.EoSP[index]
+
+        x3 = findXPoint(x1,x2,y1,y2,P)
+        return x3
 
 
     def diff(x,r):
-        rho = rhof(P0)
         P = x[0]
         m = x[1]
         # TOV
@@ -31,6 +41,7 @@ def TOV(P0,tau):
 
     eps = np.finfo(float).eps
     
+    rho = rhof(P0)
     x0 = [P0,0]
     
     r_new = 1e-10
@@ -65,6 +76,7 @@ def TOV(P0,tau):
                 
         t_span = np.linspace(t_span[-1],tau+t_span[-1],10)
         x0 = [P[-1],m[-1]]
+        rho = rhof(P[-1])
 
     R1 = R
     M1 = M
