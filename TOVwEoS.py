@@ -67,7 +67,7 @@ def TOVEoS(P0,tau):
                 R = t_span[i-1]
                 M = m[i-1]
             compactness = R/M
-            print('Star found with R= ',R,'& M=',M, 'Compactness(R/M > 2.25) = ',(R)/(M),'(1 Step Profile) with',len(r_array),'steps')
+            print('Star found with R= ',R,'& M=',M, 'Compactness(R/M) = ',(R)/(M),'(1 Step Profile) with',len(r_array),'steps')
             break
 
         P_array = np.append(P_array,P)
