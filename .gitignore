@@ -5,3 +5,4 @@ EoS.pyc
 .gitignore
 __pycache__/EoS.cpython-39.pyc
 functions.pyc
+__pycache__/TOVwEoS.cpython-39.pyc
