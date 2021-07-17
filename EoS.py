@@ -19,3 +19,15 @@ class EoSclass():
         b =quad(EosRho,kmin,kmax[i]) 
         EoSP = np.append(EoSP,a[0])
         EoSrho = np.append(EoSrho,b[0])
+
+
+
+# Plot of pressure vs rho 
+
+E = EoSclass
+plt.loglog(E.EoSrho,E.EoSP,color='red')
+plt.xlabel('log $\epsilon$')
+plt.ylabel('log $P$')
+plt.title('Pressure vs Density')
+plt.legend(['Pressure vs Densty (EoS)'])
+plt.show()

@@ -3,17 +3,6 @@ import matplotlib.pyplot as plt
 from EoS import EoSclass
 from scipy.interpolate import interp1d
 from TOVwEoS import TOVEoS
-# Plot of pressure vs rho 
-
-E = EoSclass
-plt.loglog(E.EoSrho,E.EoSP,color='red')
-plt.xlabel('log $\epsilon$')
-plt.ylabel('log $P$')
-plt.title('Pressure vs Density')
-plt.legend(['Pressure vs Densty (EoS)'])
-# plt.show()
-
-
 
 # pressure vs radius and mass vs radius plots
 
