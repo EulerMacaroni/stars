@@ -18,14 +18,15 @@ plt.legend(['Pressure vs Densty (EoS)'])
 
 # pressure vs radius and mass vs radius plots
 
-P0 = 1e-7
-sol = TOVEoS(P0,1e-2)
+P0 = 0.4
+sol = TOVEoS(P0,1e-1)
 P = sol[3]
 r_arr = sol[2]
 m_arr = sol[4]
 
 f2 = plt.figure(2)
 plt.plot(r_arr,P,color= 'green')
+plt.yscale('log')
 plt.ylabel('$P(r)$')
 plt.xlabel('$r$')
 plt.legend(['$P(r)$ with EoS'])

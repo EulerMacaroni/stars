@@ -85,6 +85,6 @@ def TOVEoS(P0,tau):
     return R1,M1,r_array,P_array,m_array,comp
 
 # TOV test
-# sol = TOVEoS(1e-5,1e-2)
+# sol = TOVEoS(1e-7,1e-3)
 # plt.plot(sol[3],sol[2])
 # plt.show()
