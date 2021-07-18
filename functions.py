@@ -47,6 +47,8 @@ def EosP(k):
     m_f =1
     return (1/(3*pi**2))*((k**4)/(np.sqrt(m_f**2 + k**2)))
 
+def intTerm(y,z):
+    return (((1/(3*pi**2)))**2)*(y**2)*(z**6)
 
 def findXPoint(x1,x2,y1,y2,y3):
     m = (x2 - x1)/(y2 - y1)
