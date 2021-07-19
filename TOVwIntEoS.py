@@ -1,32 +1,35 @@
 import numpy as np
 from scipy.integrate import odeint
-from EoS import EoSclass
+from EoS import EoSIntClass
 from functions import findXPoint
 
-E = EoSclass
 
-def rhof(P):
-    i = min(E.EoSP,key=lambda x:abs(x-P)) #find closest value to P0
-    a = np.where(E.EoSP==i) # index of closest point to P0
-    index =a[0][0] #index of closest P0 (a outputs 2 dim. array)
+def TOVEoSI(P0,y):
+
+    E = EoSIntClass(y)
+
+    def rhof(P_v):
+        i = min(E.P,key=lambda x:abs(x-P_v)) #find closest value to P0
+        a = np.where(E.P==i) # index of closest point to P0
+        index =a[0][0] #index of closest P0 (a outputs 2 dim. array)
     
-    x2 = E.EoSrho[index+1]
-    x1 = E.EoSrho[index]
-    y2 = E.EoSP[index+1]
-    y1 = E.EoSP[index]
+        x2 = E.rho[index+1]
+        x1 = E.rho[index]
+        y2 = E.P[index+1]
+        y1 = E.P[index]
 
-    x3 = findXPoint(x1,x2,y1,y2,P)
-    return x3
+        x3 = findXPoint(x1,x2,y1,y2,P_v)
+        return x3
 
-def tauf(P0):
-    if P0 >= 0.3 and P0<1:
-        return 1e-5
-    elif P0 >= 1:
-        return 1e-3
-    else:
-        return 1e-1
+    def tauf(P_value):
+        if P_value >= 0.3 and P_value<1:
+            return 1e-5
+        elif P_value >= 1:
+            return 1e-3
+        else:
+            return 1e-1
 
-def TOVEoS(P0):
+
 
     def diff(x,r):
         P = x[0]
@@ -90,6 +93,7 @@ def TOVEoS(P0):
     return R1,M1,r_array,P_array,m_array,comp
 
 # TOV test
-# sol = TOVEoS(1e-7,1e-3)
-# plt.plot(sol[3],sol[2])
-# plt.show()
+import matplotlib.pyplot as plt
+sol = TOVEoSI(1e-7,1)
+plt.plot(sol[3],sol[2])
+plt.show()

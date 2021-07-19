@@ -1,9 +1,6 @@
-from matplotlib import colors
 import numpy as np
 import matplotlib.pyplot as plt
 from EoS import EoSclass,EoSIntClass
-from scipy.interpolate import interp1d
-from TOVwEoS import TOVEoS
 
 
 # Plot of pressure vs rho 

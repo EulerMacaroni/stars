@@ -1,8 +1,5 @@
 import numpy as np
-import matplotlib.pyplot as plt
-from scipy.integrate.odepack import odeint
 from functions import EosP, EosRho,intTerm
-from scipy.interpolate import interp1d
 from scipy.integrate import quad
 
 class EoSclass():

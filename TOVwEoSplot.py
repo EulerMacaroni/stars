@@ -1,7 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from EoS import EoSclass,EoSIntClass
-from scipy.interpolate import interp1d
 from TOVwEoS import TOVEoS
 
 # pressure vs radius and mass vs radius plots
