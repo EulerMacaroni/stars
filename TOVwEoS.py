@@ -41,9 +41,9 @@ def TOVEoS(P0):
     int_P = P0
     limit = int_P*(1e-3)
 
-    tau = tauf2(rho)
+    tau = tauf1(P0)
     r_new = 1e-10
-    t_span =np.linspace(r_new,tau+r_new,20)
+    t_span =np.linspace(r_new,tau+r_new,10)
     
     P_array  = np.array([])
     r_array  = np.array([])
@@ -55,7 +55,7 @@ def TOVEoS(P0):
         P = sol[:,0] 
         m = sol[:,1]
 
-        # print(P)
+        print(P)
         if (P <= limit).any():
             index = np.where(P<= limit)
             i = index[0][0]
@@ -73,8 +73,8 @@ def TOVEoS(P0):
         r_array = np.append(r_array,t_span)
         m_array = np.append(m_array,m)
         rho = rhof(P[-1])
-        tau = tauf2(rho)
-        t_span = np.linspace(t_span[-1],tau+t_span[-1],20)
+        tau = tauf1(P[-1])
+        t_span = np.linspace(t_span[-1],tau+t_span[-1],10)
         x0 = [P[-1],m[-1]]
 
     R1 = R

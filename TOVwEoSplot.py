@@ -4,7 +4,7 @@ from TOVwEoS import TOVEoS
 
 # pressure vs radius and mass vs radius plots
 
-P0 = 0.09
+P0 = 1e+3
 sol = TOVEoS(P0)
 P = sol[3]
 r_arr = sol[2]
