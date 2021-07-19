@@ -1,8 +1,6 @@
 import numpy as np
-from scipy.integrate import solve_ivp
-from scipy.integrate import odeint
 import matplotlib.pyplot as plt
-from functions import rel, mass, convED,convP
+from functions import rel, mass
 from TOV import TOV
 from TOVwEoS import rhof
 

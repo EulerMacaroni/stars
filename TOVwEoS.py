@@ -23,8 +23,10 @@ def tauf(P0):
         return 1e-5
     elif P0 >= 1:
         return 1e-3
-    else:
+    elif P0 > 0.1 and P0<0.3:
         return 1e-1
+    else: 
+        return 1
 
 def TOVEoS(P0):
 
@@ -45,6 +47,8 @@ def TOVEoS(P0):
     
     rho = rhof(P0)
     x0 = [P0,0]
+    int_P = P0
+    limit = int_P*(1e-3)
 
     tau = tauf(P0)
     r_new = 1e-10
@@ -61,7 +65,6 @@ def TOVEoS(P0):
         m = sol[:,1]
 
         # print(P)
-        limit = 1e-8
         if (P <= limit).any():
             index = np.where(P<= limit)
             i = index[0][0]
@@ -90,6 +93,7 @@ def TOVEoS(P0):
     return R1,M1,r_array,P_array,m_array,comp
 
 # TOV test
-# sol = TOVEoS(1e-7,1e-3)
-# plt.plot(sol[3],sol[2])
+# import matplotlib.pyplot as plt
+# sol = TOVEoS(1e-7)
+# plt.plot(sol[2],sol[3])
 # plt.show()

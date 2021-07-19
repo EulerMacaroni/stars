@@ -21,15 +21,15 @@ def TOVEoSI(P0,y):
         x3 = findXPoint(x1,x2,y1,y2,P_v)
         return x3
 
-    def tauf(P_value):
-        if P_value >= 0.3 and P_value<1:
+    def tauf(P0):
+        if P0 >= 0.3 and P0<1:
             return 1e-5
-        elif P_value >= 1:
+        elif P0 >= 1:
             return 1e-3
-        else:
+        elif P0 > 0.1 and P0<0.3:
             return 1e-1
-
-
+        else: 
+            return 1
 
     def diff(x,r):
         P = x[0]
@@ -49,6 +49,9 @@ def TOVEoSI(P0,y):
     rho = rhof(P0)
     x0 = [P0,0]
 
+    int_P = P0
+    limit = int_P*(1e-3)
+
     tau = tauf(P0)
     r_new = 1e-10
     t_span =np.linspace(r_new,tau+r_new,20)
@@ -64,7 +67,6 @@ def TOVEoSI(P0,y):
         m = sol[:,1]
 
         # print(P)
-        limit = 1e-8
         if (P <= limit).any():
             index = np.where(P<= limit)
             i = index[0][0]
@@ -96,7 +98,7 @@ def TOVEoSI(P0,y):
 # import matplotlib.pyplot as plt
 # sol = TOVEoSI(1e-7,0.1)
 # fig1 = plt.figure(1)
-# plt.plot(sol[3],sol[2])
+# plt.plot(sol[2],sol[3])
 # fig2 = plt.figure(2)
 # plt.plot(sol[2],sol[-2])
 # plt.show()
