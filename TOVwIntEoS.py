@@ -93,7 +93,7 @@ def TOVEoSI(P0,y):
     return R1,M1,r_array,P_array,m_array,comp
 
 # TOV test
-import matplotlib.pyplot as plt
-sol = TOVEoSI(1e-7,1)
-plt.plot(sol[3],sol[2])
-plt.show()
+# import matplotlib.pyplot as plt
+# sol = TOVEoSI(1e-7,1)
+# plt.plot(sol[3],sol[2])
+# plt.show()
