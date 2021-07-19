@@ -20,12 +20,11 @@ def Pforrho(rho_0):
     x3 = findXPoint(x1,x2,y1,y2,rho_0)
     return x3
 
-rho = linspace(10**(-8),10,5,endpoint=True)
+rho = np.linspace(10**(-8),10,5,endpoint=True)
 P0 = np.array([])
 
 for i in range(len(rho)):
     P0 = np.append(P0,Pforrho(rho[i]))
-
 
 # P0 = np.linspace(0.9,4,4,endpoint=True)        # limits = (1e-78,4,10)
 

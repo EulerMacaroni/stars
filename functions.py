@@ -54,3 +54,22 @@ def findXPoint(x1,x2,y1,y2,y3):
     m = (x2 - x1)/(y2 - y1)
     x3 = (y3 - y1)*m + x1
     return x3
+
+
+def tauf1(P0):
+    if P0 >= 0.3 and P0<1:
+        return 1e-5
+    elif P0 >= 1:
+        return 1e-3
+    elif P0 >= 0.1 and P0<0.3:
+        return 1e-1
+    else: 
+        return 1
+
+
+
+def tauf2(rho):
+    if rho < 1:
+        return 0.1
+    elif rho >= 1:
+        return 0.01

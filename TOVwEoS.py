@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.integrate import odeint
 from EoS import EoSclass
-from functions import findXPoint
+from functions import findXPoint,tauf1,tauf2
 
 E = EoSclass
 
@@ -18,15 +18,6 @@ def rhof(P):
     x3 = findXPoint(x1,x2,y1,y2,P)
     return x3
 
-def tauf(P0):
-    if P0 >= 0.3 and P0<1:
-        return 1e-5
-    elif P0 >= 1:
-        return 1e-3
-    elif P0 > 0.1 and P0<0.3:
-        return 1e-1
-    else: 
-        return 1
 
 def TOVEoS(P0):
 
@@ -50,7 +41,7 @@ def TOVEoS(P0):
     int_P = P0
     limit = int_P*(1e-3)
 
-    tau = tauf(P0)
+    tau = tauf2(rho)
     r_new = 1e-10
     t_span =np.linspace(r_new,tau+r_new,20)
     
@@ -81,10 +72,10 @@ def TOVEoS(P0):
         P_array = np.append(P_array,P)
         r_array = np.append(r_array,t_span)
         m_array = np.append(m_array,m)
-        tau = tauf(P[-1])
+        rho = rhof(P[-1])
+        tau = tauf2(rho)
         t_span = np.linspace(t_span[-1],tau+t_span[-1],20)
         x0 = [P[-1],m[-1]]
-        rho = rhof(P[-1])
 
     R1 = R
     M1 = M
