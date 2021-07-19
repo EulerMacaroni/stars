@@ -9,9 +9,9 @@ class EoSclass():
     
     eps = np.finfo(float).eps
     
-    kmin = 1e-8
+    kmin = eps
     # kmin = eps
-    kmax = np.linspace(kmin+eps,5000,10000)
+    kmax = np.linspace(kmin+eps,9000,10000)
 
     EoSrho = np.array([])
     EoSP = np.array([])
@@ -22,6 +22,8 @@ class EoSclass():
         EoSrho = np.append(EoSrho,b[0])
 
 # print('min=', min(EoSclass.EoSP),'max=',max(EoSclass.EoSP))
+# print('min=', min(EoSclass.EoSrho),'max=',max(EoSclass.EoSrho))
+
 
 class EoSIntClass():
 
@@ -30,9 +32,9 @@ class EoSIntClass():
     
         eps = np.finfo(float).eps
     
-        kmin = 1e-8
+        kmin = eps
         # kmin = eps
-        kmax = np.linspace(kmin+eps,5000,10000)
+        kmax = np.linspace(kmin+eps,9000,10000)
 
         EoSrho = np.array([])
         EoSP = np.array([])

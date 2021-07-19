@@ -22,7 +22,15 @@ def rhof(P):
     x3 = findXPoint(x1,x2,y1,y2,P)
     return x3
 
-def TOVEoS(P0,tau):
+def tauf(P0):
+    if P0 >= 0.3 and P0<1:
+        return 1e-5
+    elif P0 >= 1:
+        return 1e-3
+    else:
+        return 1e-1
+
+def TOVEoS(P0):
 
     def diff(x,r):
         P = x[0]
@@ -41,9 +49,10 @@ def TOVEoS(P0,tau):
     
     rho = rhof(P0)
     x0 = [P0,0]
-    
+
+    tau = tauf(P0)
     r_new = 1e-10
-    t_span =np.linspace(r_new,tau+r_new,10)
+    t_span =np.linspace(r_new,tau+r_new,20)
     
     P_array  = np.array([])
     r_array  = np.array([])
@@ -55,7 +64,7 @@ def TOVEoS(P0,tau):
         P = sol[:,0] 
         m = sol[:,1]
 
-        print(P)
+        # print(P)
         limit = 1e-8
         if (P <= limit).any():
             index = np.where(P<= limit)
@@ -73,8 +82,8 @@ def TOVEoS(P0,tau):
         P_array = np.append(P_array,P)
         r_array = np.append(r_array,t_span)
         m_array = np.append(m_array,m)
-                
-        t_span = np.linspace(t_span[-1],tau+t_span[-1],10)
+        tau = tauf(P[-1])
+        t_span = np.linspace(t_span[-1],tau+t_span[-1],20)
         x0 = [P[-1],m[-1]]
         rho = rhof(P[-1])
 
