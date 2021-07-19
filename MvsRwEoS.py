@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from TOVwEoS import TOVEoS
 from EoS import EoSclass
 
-P0 = np.linspace(1e-7,4,50,endpoint=True)        # limits = (1e-78,4,10)
+P0 = np.linspace(0.9,4,4,endpoint=True)        # limits = (1e-78,4,10)
 # tau =1e-3
 R = np.array([])
 M = np.array([])
