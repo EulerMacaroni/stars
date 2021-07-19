@@ -86,5 +86,5 @@ def tauf1(P0):
 #     elif rho >= 1:
 #         return 0.1
 
-def tauf2(rho):
-    return 0.00001
+# def tauf2(rho):
+#     return 0.00001
