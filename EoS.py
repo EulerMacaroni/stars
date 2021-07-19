@@ -18,8 +18,11 @@ class EoSclass():
         EoSP = np.append(EoSP,a[0])
         EoSrho = np.append(EoSrho,b[0])
 
+# import matplotlib.pyplot as plt
+# plt.plot(EoSclass.EoSP,EoSclass.EoSrho,'-.')
 # print('min=', min(EoSclass.EoSP),'max=',max(EoSclass.EoSP))
 # print('min=', min(EoSclass.EoSrho),'max=',max(EoSclass.EoSrho))
+# plt.show()
 
 
 class EoSIntClass():

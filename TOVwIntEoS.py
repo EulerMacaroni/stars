@@ -94,6 +94,9 @@ def TOVEoSI(P0,y):
 
 # TOV test
 # import matplotlib.pyplot as plt
-# sol = TOVEoSI(1e-7,1)
+# sol = TOVEoSI(1e-7,0.1)
+# fig1 = plt.figure(1)
 # plt.plot(sol[3],sol[2])
+# fig2 = plt.figure(2)
+# plt.plot(sol[2],sol[-2])
 # plt.show()
