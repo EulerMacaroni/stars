@@ -15,12 +15,14 @@ def Pforrho(rho):
     f = interp1d([E.EoSrho[index-1],E.EoSrho[index],E.EoSrho[index+1]],[E.EoSP[index-1],E.EoSP[index],E.EoSP[index+1]])
     return f(rho)
 
-rho = np.linspace(10**(-1)/2,10,5,endpoint=True)
+rho = np.linspace(10**(-8),10,5,endpoint=True)
 P0 = np.array([])
 
 for i in range(len(rho)):
     P0 = np.append(P0,Pforrho(rho[i]))
 
+print(rho)
+print(P0)
 # P0 = np.linspace(0.9,4,4,endpoint=True)        # limits = (1e-78,4,10)
 
 R = np.array([])

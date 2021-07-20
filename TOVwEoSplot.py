@@ -18,7 +18,7 @@ plt.xlabel('$r$')
 plt.legend(['$P(r)$ with EoS'])
 
 f2 = plt.figure(2)
-plt.loglog(r_arr,m_arr,color='blue')
+plt.plot(r_arr,m_arr,color='blue')
 plt.ylabel('$m(r)$')
 plt.xlabel('$r$')
 plt.legend(['$m(r)$ with EoS'])
