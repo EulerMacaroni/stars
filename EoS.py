@@ -6,12 +6,18 @@ class EoSclass():
     
     eps = np.finfo(float).eps
     
-    kmin = eps
+    kmin = 0
     # kmin = eps
-    kmax = np.linspace(kmin+eps,9000,10000)
+    kmax = np.array([])
+
+    k1 = np.linspace(1e-16,1e-15,500,endpoint=True)
+    for i in range(0,21):
+        k = k1*(10**i)
+        kmax = np.append(kmax,k)
 
     EoSrho = np.array([])
     EoSP = np.array([])
+
     for i in range(len(kmax)):
         a =quad(EosP,kmin,kmax[i]) 
         b =quad(EosRho,kmin,kmax[i]) 
@@ -45,3 +51,7 @@ class EoSIntClass():
             EoSrho = np.append(EoSrho,b[0]+intTerm(self.y,kmax[i]))
         self.P = EoSP
         self.rho = EoSrho
+
+
+
+# np.savetxt("eosdata.txt", kmax, delimiter=",")
