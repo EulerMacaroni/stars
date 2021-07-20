@@ -1,17 +1,10 @@
 import numpy as np
 from scipy.integrate import odeint
 from EoS import EoSclass
-from functions import findXPoint,tauf1
-from scipy.interpolate import interp1d
+from functions import tauf1
+from interPwEoS import rhof
 
 E = EoSclass
-
-def rhof(P):
-    i = min(E.EoSP,key=lambda x:abs(x-P)) #find closest value to P0
-    a = np.where(E.EoSP==i) # index of closest point to P0
-    index =a[0][0] #index of closest P0 (a outputs 2 dim. array)
-    f = interp1d([E.EoSP[index-1],E.EoSP[index],E.EoSP[index+1]],[E.EoSrho[index-1],E.EoSrho[index],E.EoSrho[index+1]])    
-    return f(P)
 
 def TOVEoS(P0):
 
