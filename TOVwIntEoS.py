@@ -1,35 +1,13 @@
 import numpy as np
 from scipy.integrate import odeint
 from EoS import EoSIntClass
-from functions import findXPoint
+from functions import tauf1,minP
+from interPwEoS import rhofint
 
 
-def TOVEoSI(P0,y):
+def TOVEoS(P0,y):
 
-    E = EoSIntClass(y)
-
-    def rhof(P_v):
-        i = min(E.P,key=lambda x:abs(x-P_v)) #find closest value to P0
-        a = np.where(E.P==i) # index of closest point to P0
-        index =a[0][0] #index of closest P0 (a outputs 2 dim. array)
-    
-        x2 = E.rho[index+1]
-        x1 = E.rho[index]
-        y2 = E.P[index+1]
-        y1 = E.P[index]
-
-        x3 = findXPoint(x1,x2,y1,y2,P_v)
-        return x3
-
-    def tauf(P0):
-        if P0 >= 0.3 and P0<1:
-            return 1e-5
-        elif P0 >= 1:
-            return 1e-3
-        elif P0 > 0.1 and P0<0.3:
-            return 1e-1
-        else: 
-            return 1
+    # E = EoSIntClass(y)
 
     def diff(x,r):
         P = x[0]
@@ -46,27 +24,27 @@ def TOVEoSI(P0,y):
 
     eps = np.finfo(float).eps
     
-    rho = rhof(P0)
+    rho = rhofint(P0,y)
     x0 = [P0,0]
-
     int_P = P0
-    limit = int_P*(1e-3)
+    limit = minP(int_P)
 
-    tau = tauf(P0)
+    tau = tauf1(P0)
     r_new = 1e-10
-    t_span =np.linspace(r_new,tau+r_new,20)
+    t_span =np.linspace(r_new,tau+r_new,10)
     
     P_array  = np.array([])
     r_array  = np.array([])
     m_array  = np.array([])
 
     while True:
+        # print(rho)
     
         sol = odeint(diff,x0,t_span)
         P = sol[:,0] 
         m = sol[:,1]
 
-        # print(P)
+        print(P[-1],rho)
         if (P <= limit).any():
             index = np.where(P<= limit)
             i = index[0][0]
@@ -83,10 +61,10 @@ def TOVEoSI(P0,y):
         P_array = np.append(P_array,P)
         r_array = np.append(r_array,t_span)
         m_array = np.append(m_array,m)
-        tau = tauf(P[-1])
-        t_span = np.linspace(t_span[-1],tau+t_span[-1],20)
+        rho = rhofint(P[-1],y)
+        tau = tauf1(P[-1])
+        t_span = np.linspace(t_span[-1],tau+t_span[-1],10)
         x0 = [P[-1],m[-1]]
-        rho = rhof(P[-1])
 
     R1 = R
     M1 = M
@@ -95,10 +73,7 @@ def TOVEoSI(P0,y):
     return R1,M1,r_array,P_array,m_array,comp
 
 # TOV test
-# import matplotlib.pyplot as plt
-# sol = TOVEoSI(1e-7,0.1)
-# fig1 = plt.figure(1)
-# plt.plot(sol[2],sol[3])
-# fig2 = plt.figure(2)
-# plt.plot(sol[2],sol[-2])
-# plt.show()
+import matplotlib.pyplot as plt
+sol = TOVEoS(1e-3,10)
+plt.plot(sol[2],sol[3])
+plt.show()

@@ -2,7 +2,7 @@ import numpy as np
 from scipy.integrate import solve_ivp
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
-from functions import rel, mass, y0
+from functions import minP,tauf1
 
 
 def TOV(P0,rho_0,tau):
@@ -27,7 +27,7 @@ def TOV(P0,rho_0,tau):
     int_P = P0
     r_new = 1e-10
     t_span =np.linspace(r_new,tau+r_new,10)
-    limit = int_P*(1e-6)
+    limit = minP(int_P)
     
     P_array  = np.array([])
     r_array  = np.array([])
