@@ -55,20 +55,26 @@ def findXPoint(x1,x2,y1,y2,y3):
     x3 = (y3 - y1)*m + x1
     return x3
 
+def minP(P_value):
+    if P_value <= 1e-7:
+        return P_value*(1e-3)
+    else: 
+        return 1e-10
+
 
 def tauf1(P0):
     if P0 <= 1e-7:
-        return 2
-    elif P0> 1e-7 and P0 <= 1e-6:
-        return 0.5
-    elif P0> 1e-6 and P0 <= 1e-5:
-        return 0.25
-    elif P0> 1e-5 and P0 <= 1e-4:
-        return 0.1
-    elif P0 > 1e-4 and P0 <= 1e-3:
         return 0.01
+    elif P0> 1e-7 and P0 <= 1e-6:
+        return 0.01
+    elif P0> 1e-6 and P0 <= 1e-5:
+        return 0.01
+    elif P0> 1e-5 and P0 <= 1e-4:
+        return 0.01
+    elif P0 > 1e-4 and P0 <= 1e-3:
+        return 0.01/2
     elif P0 > 1e-3 and P0 <= 1e-2:
-        return 0.005
+        return 0.001
     elif P0 > 1e-2 and P0 <= 1e-0:
         return 0.0005
     elif P0 > 1e-0 and P0 <= 1e2:

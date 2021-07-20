@@ -15,15 +15,17 @@ class EoSclass():
         k = k1*(10**i)
         kmax = np.append(kmax,k)
 
-    EoSrho = np.array([])
-    EoSP = np.array([])
+    EoSrho1 = np.array([])
+    EoSP1 = np.array([])
 
     for i in range(len(kmax)):
         a =quad(EosP,kmin,kmax[i]) 
         b =quad(EosRho,kmin,kmax[i]) 
-        EoSP = np.append(EoSP,a[0])
-        EoSrho = np.append(EoSrho,b[0])
+        EoSP1 = np.append(EoSP1,a[0])
+        EoSrho1 = np.append(EoSrho1,b[0])
 
+    EoSP = np.unique(EoSP1)
+    EoSrho = np.unique(EoSrho1)
 # import matplotlib.pyplot as plt
 # plt.loglog(EoSclass.EoSrho,EoSclass.EoSP,color='red')
 # print('min=', min(EoSclass.EoSP),'max=',max(EoSclass.EoSP))
@@ -46,17 +48,17 @@ class EoSIntClass():
             k = k1*(10**i)
             kmax = np.append(kmax,k)
 
-        EoSrho = np.array([])
-        EoSP = np.array([])
+        EoSrho1 = np.array([])
+        EoSP1 = np.array([])
 
         for i in range(len(kmax)):
             a =quad(EosP,kmin,kmax[i]) 
             b =quad(EosRho,kmin,kmax[i]) 
-            EoSP = np.append(EoSP,a[0]+intTerm(self.y,kmax[i]))
-            EoSrho = np.append(EoSrho,b[0]+intTerm(self.y,kmax[i]))
+            EoSP1 = np.append(EoSP1,a[0]+intTerm(self.y,kmax[i]))
+            EoSrho1 = np.append(EoSrho1,b[0]+intTerm(self.y,kmax[i]))
 
-        self.P = EoSP
-        self.rho = EoSrho
+        self.P = np.unique(EoSP1)
+        self.rho = np.unique(EoSrho1)
 
 
 

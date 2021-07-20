@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.integrate import odeint
 from EoS import EoSclass
-from functions import tauf1
+from functions import tauf1,minP
 from interPwEoS import rhof
 
 E = EoSclass
@@ -26,7 +26,7 @@ def TOVEoS(P0):
     rho = rhof(P0)
     x0 = [P0,0]
     int_P = P0
-    limit = int_P*(1e-3)
+    limit = minP(int_P)
 
     tau = tauf1(P0)
     r_new = 1e-10
