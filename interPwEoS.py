@@ -49,5 +49,3 @@ def Pforrho(rho):
         f = findXPoint(p2,p1,rho2,rho1,rho)
 
     return f
-
-print(Pforrho(2.50000001e+00))
