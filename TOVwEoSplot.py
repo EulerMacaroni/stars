@@ -4,7 +4,7 @@ from TOVwEoS import TOVEoS
 
 # pressure vs radius and mass vs radius plots
 
-P0 = 1e-9
+P0 = 1e-3
 sol = TOVEoS(P0)
 P = sol[3]
 r_arr = sol[2]
@@ -18,7 +18,7 @@ plt.xlabel('$r$')
 plt.legend(['$P(r)$ with EoS'])
 
 f2 = plt.figure(2)
-plt.plot(r_arr,m_arr,color='blue')
+plt.loglog(r_arr,m_arr,color='blue')
 plt.ylabel('$m(r)$')
 plt.xlabel('$r$')
 plt.legend(['$m(r)$ with EoS'])

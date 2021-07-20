@@ -4,23 +4,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 from TOVwEoS import TOVEoS,rhof
 from EoS import EoSclass
+from scipy.interpolate import interp1d
 
 E = EoSclass
 
-def Pforrho(rho_0):
-    i = min(E.EoSrho,key=lambda x:abs(x-rho_0)) #find closest value to P0
+def Pforrho(rho):
+    i = min(E.EoSrho,key=lambda x:abs(x-rho)) #find closest value to P0
     a = np.where(E.EoSrho==i) # index of closest point to P0
     index =a[0][0] #index of closest P0 (a outputs 2 dim. array)
-    
-    x2 = E.EoSP[index+1]
-    x1 = E.EoSP[index]
-    y2 = E.EoSrho[index+1]
-    y1 = E.EoSrho[index]
+    f = interp1d([E.EoSrho[index-1],E.EoSrho[index],E.EoSrho[index+1]],[E.EoSP[index-1],E.EoSP[index],E.EoSP[index+1]])
+    return f(rho)
 
-    x3 = findXPoint(x1,x2,y1,y2,rho_0)
-    return x3
-
-rho = np.linspace(10**(-8),10,5,endpoint=True)
+rho = np.linspace(10**(-1)/2,10,5,endpoint=True)
 P0 = np.array([])
 
 for i in range(len(rho)):
@@ -31,12 +26,16 @@ for i in range(len(rho)):
 R = np.array([])
 M = np.array([])
 for i in range(len(P0)):
-    print(i,'with P=',P0[i])
+    print('Star #',i,'with P=',P0[i],'and rho=',rho[i])
     sol = TOVEoS(P0[i])
     # plt.plot(sol[2],sol[4],color='red')
-    plt.plot(sol[0],sol[1],'.',color='black')
     M = np.append(M,sol[1])
     R = np.append(R,sol[0])
+plt.xlim([0,20])
+plt.ylim([-0.05,0.5])
+
+plt.plot(R,M,'.',color='black')
+plt.plot(R,M,color='red')
 
 plt.xlabel('dimensionaless $r$')
 plt.ylabel('dimensionaless $m(r)$')

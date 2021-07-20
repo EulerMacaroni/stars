@@ -1,7 +1,8 @@
 import numpy as np
 from scipy.integrate import odeint
 from EoS import EoSclass
-from functions import findXPoint,tauf1,tauf2
+from functions import findXPoint,tauf1
+from scipy.interpolate import interp1d
 
 E = EoSclass
 
@@ -9,15 +10,8 @@ def rhof(P):
     i = min(E.EoSP,key=lambda x:abs(x-P)) #find closest value to P0
     a = np.where(E.EoSP==i) # index of closest point to P0
     index =a[0][0] #index of closest P0 (a outputs 2 dim. array)
-    
-    x2 = E.EoSrho[index+1]
-    x1 = E.EoSrho[index]
-    y2 = E.EoSP[index+1]
-    y1 = E.EoSP[index]
-
-    x3 = findXPoint(x1,x2,y1,y2,P)
-    return x3
-
+    f = interp1d([E.EoSP[index-1],E.EoSP[index],E.EoSP[index+1]],[E.EoSrho[index-1],E.EoSrho[index],E.EoSrho[index+1]])    
+    return f(P)
 
 def TOVEoS(P0):
 
@@ -50,12 +44,13 @@ def TOVEoS(P0):
     m_array  = np.array([])
 
     while True:
+        # print(rho)
     
         sol = odeint(diff,x0,t_span)
         P = sol[:,0] 
         m = sol[:,1]
 
-        print(P)
+        # print(P)
         if (P <= limit).any():
             index = np.where(P<= limit)
             i = index[0][0]

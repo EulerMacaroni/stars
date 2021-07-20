@@ -77,14 +77,3 @@ def tauf1(P0):
         return 0.00001
     else:
         return P0*(1e-8)
-
-
-
-# def tauf2(rho):
-#     if rho < 1:
-#         return 0.1/2
-#     elif rho >= 1:
-#         return 0.1
-
-# def tauf2(rho):
-#     return 0.00001
