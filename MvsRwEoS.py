@@ -6,7 +6,13 @@ from EoS import EoSclass
 
 E = EoSclass
 
-rho = np.linspace(10**(-8),10,5,endpoint=True)
+rho1 = np.linspace(10**(-8),10**(-7),20,endpoint=True)
+rho = np.array([])
+
+for i in range(0,9):
+    k = rho1*(10**i)
+    rho = np.append(rho,k)
+
 P0 = np.array([])
 
 for i in range(len(rho)):
