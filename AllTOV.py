@@ -2,8 +2,6 @@ from TOV import TOV
 import numpy as np
 from scipy.integrate import solve_ivp
 from scipy.integrate import odeint
-import matplotlib.pyplot as plt
-from functions import rel, mass, y0
 from EoS import EoSclass
 from functions import tauf1, minP
 from interPwEoS import rhof, rhofint
