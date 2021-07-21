@@ -1,7 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from TOV import TOV
-from TOVwEoS import rhof
 from AllTOV import AllTOV
 
 eps = np.finfo(float).eps
