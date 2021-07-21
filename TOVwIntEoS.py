@@ -97,7 +97,8 @@ def TOVintEoS(P0,y):
         P = sol[:,0] 
         m = sol[:,1]
 
-        print(P[-1],rho)
+        # print(P[-1],rho)
+
         if (P <= limit).any():
             index = np.where(P<= limit)
             i = index[0][0]
@@ -127,7 +128,7 @@ def TOVintEoS(P0,y):
     return R1,M1,r_array,P_array,m_array,comp
 
 # TOV test
-import matplotlib.pyplot as plt
-sol = TOVintEoS(10,1000)
-plt.plot(sol[2],sol[3])
-plt.show()
+# import matplotlib.pyplot as plt
+# sol = TOVintEoS(10,1000)
+# plt.plot(sol[2],sol[3])
+# plt.show()
