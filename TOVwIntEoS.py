@@ -15,7 +15,7 @@ def EosP(k):
 def intTerm(y,z):
     return (((1/(3*pi**2)))**2)*(y**2)*(z**6)
 
-def TOVEoS(P0,y):
+def TOVintEoS(P0,y):
 
     kmin = 0
     kmax = np.array([])
@@ -97,7 +97,7 @@ def TOVEoS(P0,y):
         P = sol[:,0] 
         m = sol[:,1]
 
-        print(P[-1],rho)
+        # print(P[-1],rho)
         if (P <= limit).any():
             index = np.where(P<= limit)
             i = index[0][0]

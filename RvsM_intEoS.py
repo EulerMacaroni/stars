@@ -22,7 +22,7 @@ R = np.array([])
 M = np.array([])
 for j in range(len(y)):
     for i in range(len(P0)):
-        print('Star #',i,'with P=',P0[i],'and rho=',rho[i])
+        print('Star #',i,'with P=',P0[i],'and rho=',rho[i],'y=',y[j])
         sol = TOVintEoS(P0[i],y[j])
         # plt.plot(sol[2],sol[4],color='red')
         M = np.append(M,sol[1])
