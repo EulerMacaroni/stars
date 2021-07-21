@@ -83,3 +83,9 @@ def tauf1(P0):
         return 0.00001
     else:
         return P0*(1e-8)
+
+def tauR(r):
+    if r <= 1e+1:
+        return 0.01
+    elif r > 1e+1:
+        return 0.001

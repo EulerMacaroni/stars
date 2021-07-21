@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.integrate import quad
 from scipy.integrate import odeint
-from functions import tauf1,minP,findXPoint
+from functions import tauf1,minP,findXPoint,tauR
 
 pi = np.pi
 def EosRho(k):
@@ -81,6 +81,7 @@ def TOVEoS(P0,y):
     int_P = P0
     limit = minP(int_P)
 
+    # tau = tauR(rho)
     tau = tauf1(P0)
     r_new = 1e-10
     t_span =np.linspace(r_new,tau+r_new,10)
@@ -114,6 +115,7 @@ def TOVEoS(P0,y):
         r_array = np.append(r_array,t_span)
         m_array = np.append(m_array,m)
         rho = rhof(P[-1])
+        # tau = tauR(rho)
         tau = tauf1(P[-1])
         t_span = np.linspace(t_span[-1],tau+t_span[-1],10)
         x0 = [P[-1],m[-1]]
