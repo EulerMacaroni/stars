@@ -52,6 +52,3 @@ def Pforrho(rho):
         f = E.EoSP[index]
 
     return f
-
-
-print(Pforrho(1))
