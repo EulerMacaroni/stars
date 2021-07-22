@@ -6,8 +6,8 @@ from TOVwIntEoS import TOVintEoS
 
 # y = [0.01,1,10,10**2,10**3]
 y = np.array([])
-y1 = np.linspace(0.01,1,3)
-for i in range(0,5):
+y1 = np.linspace(0.01,1,5)
+for i in range(0,2):
     h = y1*(10**i)
     y = np.append(y,h)
 print(y)
