@@ -4,7 +4,13 @@ import matplotlib.pyplot as plt
 from TOVwIntEoS import TOVintEoS
 
 
-y = [0,0.01,1,10,10**2,10**3]
+# y = [0.01,1,10,10**2,10**3]
+y = np.array([])
+y1 = np.linspace(0.01,1,4)
+for i in range(0,5):
+    h = y1*(10**i)
+    y = np.append(y,h)
+print(y)
 rho1 = np.linspace(10**(-8),10**(-7),5,endpoint=True)
 
 rho = np.array([])
