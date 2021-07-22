@@ -6,12 +6,12 @@ from TOVwIntEoS import TOVintEoS
 
 # y = [0.01,1,10,10**2,10**3]
 y = np.array([])
-y1 = np.linspace(0.01,1,4)
+y1 = np.linspace(0.01,1,3)
 for i in range(0,5):
     h = y1*(10**i)
     y = np.append(y,h)
 print(y)
-rho1 = np.linspace(10**(-8),10**(-7),5,endpoint=True)
+rho1 = np.linspace(10**(-8),10**(-7),10,endpoint=True)
 
 rho = np.array([])
 for i in range(0,9):
@@ -34,7 +34,7 @@ for j in range(len(y)):
         M = np.append(M,sol[1])
         R = np.append(R,sol[0])
 
-    plt.plot(R,M,'.',color='black')
+    plt.loglog(R,M,'.',color='black')
 # plt.plot(R,M,color='red')
 
 plt.xlim([1,1e4])
