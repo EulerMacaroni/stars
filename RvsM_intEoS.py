@@ -178,8 +178,8 @@ def TOVintEoS(rho_0,y):
 
 # y = [0.01,1,10,10**2,10**3]
 y = np.array([])
-y1 = np.linspace(0.01,1,5)
-for i in range(0,2):
+y1 = np.linspace(0.01,1,5,endpoint=True)
+for i in range(0,3):
     h = y1*(10**i)
     y = np.append(y,h)
 # print(y)
@@ -200,8 +200,8 @@ for j in range(len(y)):
         M = np.append(M,sol[1])
         R = np.append(R,sol[0])
 
-    plt.loglog(R,M,'.',color='black')
-    plt.plot(R, M, color='green', marker='o', markersize=0.01)
+    # plt.loglog(R,M,'.',color='black')
+    plt.loglog(R, M, color='black', marker='o', markersize=0.01)
 # plt.plot(R,M,color='red')
 
 plt.xlim([1,1e4])
