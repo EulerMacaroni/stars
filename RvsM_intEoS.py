@@ -201,6 +201,7 @@ for j in range(len(y)):
         R = np.append(R,sol[0])
 
     plt.loglog(R,M,'.',color='black')
+    plt.plot(R, M, color='green', marker='o', markersize=0.01)
 # plt.plot(R,M,color='red')
 
 plt.xlim([1,1e4])
