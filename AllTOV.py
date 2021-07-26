@@ -123,7 +123,7 @@ def AllTOV(P0, rho1, rho2=0, r_c=np.Inf, y1=0, y2=0, order=["incom", "incom"]):
             P = sol[:,0] 
             m = sol[:,1]
 
-            print(P, "fermi")
+            print(P)
             if (P <= limit).any():
                 index = np.where(P<= limit)
                 i = index[0][0]
