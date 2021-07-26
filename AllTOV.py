@@ -2,6 +2,8 @@ from TOV import TOV
 import numpy as np
 from scipy.integrate import solve_ivp
 from scipy.integrate import odeint
+import matplotlib.pyplot as plt
+from functions import rel, mass, y0
 from EoS import EoSclass
 from functions import tauf1, minP
 from interPwEoS import rhof, rhofint
@@ -207,6 +209,14 @@ def AllTOV(P0, rho1, rho2=0, r_c=np.Inf, y1=0, y2=0, order=["incom", "incom"]):
                     M = m[i-1]
                 compactness = R/M
                 print('Star found with R= ',R,'& M=',M, 'Compactness(R/M) = ',(R)/(M),'(1 Step Profile) with',len(r_array),'steps')
+                break
+
+            elif r_array[-1] > r_c and first:
+                R = r_array[-1]
+                M = m_array[-1]
+                print(R)
+                print(M)
+                compactness = R/M
                 break
 
             P_array = np.append(P_array,P)
