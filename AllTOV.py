@@ -186,9 +186,9 @@ def AllTOV(P0, rho1, rho2=0, r_c=np.Inf, y1=0, y2=0, order=["incom", "incom"]):
         r_new = r_initial
         t_span =np.linspace(r_new,tau+r_new,10)
         
-        P_array  = np.array([])
-        r_array  = np.array([])
-        m_array  = np.array([])
+        P_array  = np.array([P0])
+        r_array  = np.array([r_new])
+        m_array  = np.array([m_initial])
 
         while True:
             # print(rho)
