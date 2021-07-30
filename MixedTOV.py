@@ -134,7 +134,7 @@ def TOVmix(rho_01,rho_02,y):
     rho2_array = np.array([]) 
     
 
-    r = np.linspace(r_int,tau+r_int,20)
+    r = np.linspace(r_int,tau+r_int,500)
 
     while True:
     
@@ -166,28 +166,35 @@ def TOVmix(rho_01,rho_02,y):
                 Radius = r_vec[1]
                 i = i2
             
-            M = m_array[i]
-            R = Radius
             r_val = r_array[0:i]
             m_val = m_array[0:i]
+            R = r_val[-1]
+            M = m_val[-1]
             P1_val = P1_array[0:i]
             P2_val = P2_array[0:i]
             rho1_val = rho1_array[0:i]
             rho2_val = rho2_array[0:i]
 
-            print('Star found with R= ',R,'& M=',M, 'Compactness(R/M) = ',(R)/(M),'(Two EoS) with',len(r_array),'steps')
+            print('Star found with R= ',R,'& M=',M, 'Compactness(R/M) = ',(R)/(M),'(Two EoS) with',len(r_val),'steps')
 
             break
 
         rho1 = mitbagmodel4P(P1[-1])
         rho2 = Rho4P(P2[-1])
-        tau  = tau*5
-        r = np.linspace(r[-1],tau+r[-1],20)
+        tau  = tau*1.01
+        r = np.linspace(r[-1],tau+r[-1],500)
         y0 = [P1[-1],P2[-1],m[-1]]
 
     return R,M,r_val,m_val,[P1_val,P2_val],[rho1_val,rho2_val]
 
-# sol = TOVmix(1e-3,1e-3,0)
-# plt.plot(sol[2],sol[3])
-# plt.plot(sol[0],sol[1],'o')
+# sol = TOVmix(1,1,0)
+# fig1 = plt.figure(1)
+# P = sol[4]
+# plt.plot(sol[2],P[1])
+# fig2 = plt.figure(2)
+# plt.plot(sol[2],sol[3],sol[0],sol[1],'o')
+
 # plt.show()
+# print(sol[3])
+
+# print(sol[1])
