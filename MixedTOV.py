@@ -187,7 +187,7 @@ def TOVmix(rho_01,rho_02,y):
 
     return R,M,r_val,m_val,[P1_val,P2_val],[rho1_val,rho2_val]
 
-# sol = TOVmix(1e-2,1e-1,0)
+# sol = TOVmix(1e-3,1e-3,0)
 # plt.plot(sol[2],sol[3])
 # plt.plot(sol[0],sol[1],'or')
 # plt.show()
