@@ -169,6 +169,7 @@ def TOVmix(rho_01,rho_02,y):
             M = m_array[i]
             R = Radius
             r_val = r_array[0:i]
+            m_val = m_array[0:i]
             P1_val = P1_array[0:i]
             P2_val = P2_array[0:i]
             rho1_val = rho1_array[0:i]
@@ -184,4 +185,9 @@ def TOVmix(rho_01,rho_02,y):
         r = np.linspace(r[-1],tau+r[-1],20)
         y0 = [P1[-1],P2[-1],m[-1]]
 
-    return R,M,r_val,[P1_val,P2_val],[rho1_val,rho2_val]
+    return R,M,r_val,m_val,[P1_val,P2_val],[rho1_val,rho2_val]
+
+# sol = TOVmix(1e-2,1e-1,0)
+# plt.plot(sol[2],sol[3])
+# plt.plot(sol[0],sol[1],'or')
+# plt.show()
