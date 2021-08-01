@@ -131,14 +131,14 @@ def EoS2(rho_0, y1 ,y2):
         dmdr = 4*np.pi*(r**2)*rho
         return [dpdr,dmdr]
 
-    def rhof(rho):
-        if rho <= 1e-2:
+    def choose(rho):
+        if rho >= 1e-2:
             return 1
         else:
             return 2
 
     rho = rho_0
-    P0 = P4Rho(rho,rhof(rho))
+    P0 = P4Rho(rho,choose(rho))
 
     x0 = [P0,0]
     int_P = P0
@@ -180,7 +180,7 @@ def EoS2(rho_0, y1 ,y2):
             print('Star found with R= ',R,'& M=',M, 'Compactness(R/M) = ',(R)/(M),'(1 Step Profile) with',len(r_array),'steps')
             break
 
-        rho = Rho4P(P[-1],rhof(rho_array[-1]))
+        rho = Rho4P(P[-1],choose(rho_array[-1]))
         tau = tau*1.01
         t_span = np.linspace(t_span[-1],tau+t_span[-1],10)
         x0 = [P[-1],m[-1]]
