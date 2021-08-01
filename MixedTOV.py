@@ -216,4 +216,4 @@ plt.plot(r,P[1])
 fig2 = plt.figure(3)
 plt.plot(r,m,R,M,'o')
 
-plt.show()
+# plt.show()
