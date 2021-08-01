@@ -6,7 +6,16 @@ from functions import findXPoint, minP
 
 pi = np.pi
 B = (145)**4
-m_f = 1
+m_f = 100000
+Mp = 1.3394 * (10**-1)
+G = Mp**(-2)
+# G =1
+a = (Mp**3)/(m_f**4)
+b = (Mp)/(m_f**2)
+x1 = np.sqrt(B)
+x2 = 4*B
+x3 = m_f**4
+
 def EosRho(k):
     return (1/(pi**2))*(k**2)*(np.sqrt(m_f**2 + k**2))
     
@@ -87,10 +96,10 @@ def TOVmix(rho_01,rho_02,y):
         return f
 
     def mitbagmod4rho(rho):
-        return (1/3)*(rho - 3*B)
+        return ((1/3)*(rho - 3*B))
     
     def mitbagmodel4P(P):
-        return 3*P + 4*B
+        return (3*P + 4*B)
 
 
     P01 = mitbagmod4rho(rho_01)
@@ -101,15 +110,15 @@ def TOVmix(rho_01,rho_02,y):
         P2 = x[1]
         m  = x[2]
 
-        k01 = (rho1)/(r)
+        k01 = (G*rho1)/(r)
         k11 = 1 + (P1/rho1)
         k21 = m + 4*pi*(r**3)*(P1+P2)
-        k31 = (r - (2*m))**(-1)
+        k31 = (r - (2*G*m))**(-1)
 
-        k02 = (rho2)/(r)
+        k02 = (G*rho2)/(r)
         k12 = 1 + (P2/rho2)
         k22 = m + 4*pi*(r**3)*(P1+P2)
-        k32 = (r - (2*m))**(-1)
+        k32 = (r - (2*G*m))**(-1)
 
         dP1dr = -(k01)*(k11*k21*k31) 
         dP2dr = -(k02)*(k12*k22*k32) 
@@ -175,7 +184,8 @@ def TOVmix(rho_01,rho_02,y):
             rho1_val = rho1_array[0:i]
             rho2_val = rho2_array[0:i]
 
-            print('Star found with R= ',R,'& M=',M, 'Compactness(R/M) = ',(R)/(M),'(Two EoS) with',len(r_val),'steps')
+            # print('Star found with R= ',R,'& M=',M, 'Compactness(R/M) = ',(R)/(M),'(Two EoS) with',len(r_val),'steps')
+            print('Star found for Two EoS with',len(r_val),'steps')
 
             break
 
@@ -185,16 +195,25 @@ def TOVmix(rho_01,rho_02,y):
         r = np.linspace(r[-1],tau+r[-1],500)
         y0 = [P1[-1],P2[-1],m[-1]]
 
-    return R,M,r_val,m_val,[P1_val,P2_val],[rho1_val,rho2_val]
+    return R , M , r_val , m_val , [P1_val , P2_val] , [rho1_val , rho2_val]
 
-# sol = TOVmix(1,1,0)
-# fig1 = plt.figure(1)
-# P = sol[4]
-# plt.plot(sol[2],P[1])
-# fig2 = plt.figure(2)
-# plt.plot(sol[2],sol[3],sol[0],sol[1],'o')
+sol = TOVmix(1e-5,1e-2,0)
+R = sol[0]
+M = sol[1]
+r = sol[2]
+m = sol[3]
+P = sol[4]
 
-# plt.show()
-# print(sol[3])
+fig1 = plt.figure(1)
+# plt.yscale('log')
+plt.plot(r,P[0])
 
-# print(sol[1])
+fig2 = plt.figure(2)
+# plt.yscale('log')
+plt.plot(r,P[1])
+
+
+fig2 = plt.figure(3)
+plt.plot(r,m,R,M,'o')
+
+plt.show()
