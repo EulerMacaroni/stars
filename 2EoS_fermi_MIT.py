@@ -188,6 +188,7 @@ def EoS2FandMIT(rho_0, y1,r_c):
     return R,M,r_val,P_val,m_val,comp
 
 y1 = 10
+r_c = 5
 
 rho1 = np.linspace(10**(-8),10**(-7),10,endpoint=True)
 rho = np.array([])
@@ -200,7 +201,7 @@ M = np.array([])
 comp = np.array([])
 
 for i in range(len(rho)):
-    sol = EoS2FandMIT(rho[i], y1)
+    sol = EoS2FandMIT(rho[i], y1,r_c)
     R = np.append(R,sol[0])
     M = np.append(M,sol[1])
     comp = np.append(comp,sol[5])
