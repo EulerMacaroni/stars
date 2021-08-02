@@ -1,5 +1,4 @@
 import numpy as np
-from numpy.core.function_base import linspace
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
 from scipy.integrate import quad
@@ -10,7 +9,7 @@ import numpy as np
 # define the core by density 
 
 pi = np.pi
-B = (1)**4
+B = (145)**4
 m_f = 1
 Mp = 1.3394 * (10**-1)
 # G = Mp**(-2)
@@ -30,7 +29,7 @@ def EosP(k):
 def intTerm(y,z):
     return (((1/(3*pi**2)))**2)*(y**2)*(z**6)
 
-def EoS2FandMIT(rho_0, y1):
+def EoS2FandMIT(rho_0, y1,r_c):
 
     kmin = 0
     kmax = np.array([])
@@ -86,7 +85,7 @@ def EoS2FandMIT(rho_0, y1):
             return f1
 
         elif a==2:
-            return 3*P_v + 3*B
+            return 3*P_v + 4*B
 
     def P4Rho(rho_v,b):
         if b ==1:
@@ -131,14 +130,14 @@ def EoS2FandMIT(rho_0, y1):
         dmdr = 4*np.pi*(r**2)*rho
         return [dpdr,dmdr]
 
-    def choose(rho):
-        if rho >= 1e-2:
+    def choose(r):
+        if r <= r_c:
             return 1
         else:
             return 2
 
     rho = rho_0
-    P0 = P4Rho(rho,choose(rho))
+    P0 = P4Rho(rho,1)
 
     x0 = [P0,0]
     int_P = P0
@@ -180,8 +179,8 @@ def EoS2FandMIT(rho_0, y1):
             print('Star found with R= ',R,'& M=',M, 'Compactness(R/M) = ',(R)/(M),'(2 Step Profile) with',len(r_array),'steps')
             break
 
-        rho = Rho4P(P[-1],choose(rho_array[-1]))
-        tau = tau*1.01
+        rho = Rho4P(P[-1],choose(r_array[-1]))
+        tau = tau*1.001
         t_span = np.linspace(t_span[-1],tau+t_span[-1],10)
         x0 = [P[-1],m[-1]]
 
@@ -222,4 +221,3 @@ plt.ylim([0,4/9 +0.1 ])
 plt.grid()
 
 plt.show()
-
