@@ -11,7 +11,7 @@ import numpy as np
 
 pi = np.pi
 B = (145)**4
-m_f = 1
+m_f = 100000
 Mp = 1.3394 * (10**-1)
 # G = Mp**(-2)
 G =1
