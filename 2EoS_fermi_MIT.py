@@ -30,7 +30,7 @@ def EosP(k):
 def intTerm(y,z):
     return (((1/(3*pi**2)))**2)*(y**2)*(z**6)
 
-def EoS2(rho_0, y1):
+def EoS2FandMIT(rho_0, y1):
 
     kmin = 0
     kmax = np.array([])
@@ -47,7 +47,7 @@ def EoS2(rho_0, y1):
 
     for i in range(len(kmax)):
         a =quad(EosP,kmin,kmax[i]) 
-        b =quad(EosRho,kmin,kmax[i])            # if u cut at 1e-2, lin (1e-2 ,1000) --> P 1/3 
+        b =quad(EosRho,kmin,kmax[i])
         EoSP_1 = np.append(EoSP_1,a[0]+intTerm(y1,kmax[i]))
         EoSrho_1 = np.append(EoSrho_1,b[0]+intTerm(y1,kmax[i]))
         # EoSP_2 = np.append(EoSP_2,a[0]+intTerm(y2,kmax[i]))
@@ -189,7 +189,6 @@ def EoS2(rho_0, y1):
     return R,M,r_val,P_val,m_val,comp
 
 y1 = 10
-y2 = 1e-2
 
 rho1 = np.linspace(10**(-8),10**(-7),5,endpoint=True)
 rho = np.array([])
@@ -202,7 +201,7 @@ M = np.array([])
 comp = np.array([])
 
 for i in range(len(rho)):
-    sol = EoS2(rho[i], y1 ,y2)
+    sol = EoS2FandMIT(rho[i], y1)
     R = np.append(R,sol[0])
     M = np.append(M,sol[1])
     comp = np.append(comp,sol[5])
