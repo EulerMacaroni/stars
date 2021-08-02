@@ -10,7 +10,7 @@ import numpy as np
 # define the core by density 
 
 pi = np.pi
-B = (145)**4
+B = (1)**4
 m_f = 1
 Mp = 1.3394 * (10**-1)
 # G = Mp**(-2)
@@ -30,7 +30,8 @@ def EosP(k):
 def intTerm(y,z):
     return (((1/(3*pi**2)))**2)*(y**2)*(z**6)
 
-def EoS2(rho_0, y1 ,y2):
+def EoS2(rho_0, y1):
+
     kmin = 0
     kmax = np.array([])
     k1 = np.linspace(1e-16,1e-15,500,endpoint=True)
@@ -41,82 +42,81 @@ def EoS2(rho_0, y1 ,y2):
 
     EoSrho_1 = np.array([])
     EoSP_1 = np.array([])
-    EoSrho_2 = np.array([])
-    EoSP_2 = np.array([])
+    # EoSrho_2 = np.array([])
+    # EoSP_2 = np.array([])
 
     for i in range(len(kmax)):
         a =quad(EosP,kmin,kmax[i]) 
         b =quad(EosRho,kmin,kmax[i])            # if u cut at 1e-2, lin (1e-2 ,1000) --> P 1/3 
         EoSP_1 = np.append(EoSP_1,a[0]+intTerm(y1,kmax[i]))
         EoSrho_1 = np.append(EoSrho_1,b[0]+intTerm(y1,kmax[i]))
-        EoSP_2 = np.append(EoSP_2,a[0]+intTerm(y2,kmax[i]))
-        EoSrho_2 = np.append(EoSrho_2,b[0]+intTerm(y2,kmax[i]))
+        # EoSP_2 = np.append(EoSP_2,a[0]+intTerm(y2,kmax[i]))
+        # EoSrho_2 = np.append(EoSrho_2,b[0]+intTerm(y2,kmax[i]))
 
     EoSP1 = np.unique(EoSP_1)
     EoSrho1 = np.unique(EoSrho_1)
-    EoSP2 = np.unique(EoSP_1)
-    EoSrho2 = np.unique(EoSrho_1)
+    # EoSP2 = np.unique(EoSP_1)
+    # EoSrho2 = np.unique(EoSrho_1)
 
     def Rho4P(P_v,a):            
         if a ==1:
             EoSP = EoSP1
             EoSrho = EoSrho1
+
+            i = min(EoSP,key=lambda x:abs(x-P_v)) 
+            a = np.where(EoSP==i) 
+            index =a[0][0] 
+            p1 = EoSP[index]
+            rho1 = EoSrho[index]
+
+            if P_v > EoSP[index]:
+                p2 = EoSP[index+1]
+                rho2 = EoSrho[index+1]
+                f1 = findXPoint(rho1,rho2,p1,p2,P_v)
+                # f2 = interp1d([p1,p2],[rho1,rho2])
+
+            elif P_v < EoSP[index]:
+                p2 = EoSP[index-1]
+                rho2 = EoSrho[index-1]
+                f1 = findXPoint(rho2,rho1,p2,p1,P_v)
+                # f2 = interp1d([p2,p1],[rho2,rho1])
+            elif P_v == EoSP[index]:
+                f1 = EoSrho[index]
+
+            return f1
+
         elif a==2:
-            EoSP = EoSP2
-            EoSrho = EoSrho2
+            return 3*P_v + 3*B
 
-        i = min(EoSP,key=lambda x:abs(x-P_v)) 
-        a = np.where(EoSP==i) 
-        index =a[0][0] 
-        p1 = EoSP[index]
-        rho1 = EoSrho[index]
-
-        if P_v > EoSP[index]:
-            p2 = EoSP[index+1]
-            rho2 = EoSrho[index+1]
-            f1 = findXPoint(rho1,rho2,p1,p2,P_v)
-            # f2 = interp1d([p1,p2],[rho1,rho2])
-
-        elif P_v < EoSP[index]:
-            p2 = EoSP[index-1]
-            rho2 = EoSrho[index-1]
-            f1 = findXPoint(rho2,rho1,p2,p1,P_v)
-            # f2 = interp1d([p2,p1],[rho2,rho1])
-        elif P_v == EoSP[index]:
-            f1 = EoSrho[index]
-
-        return f1
-
-    def P4Rho(rho,b):
+    def P4Rho(rho_v,b):
         if b ==1:
             EoSP = EoSP1
             EoSrho = EoSrho1
+
+            i = min(EoSrho,key=lambda x:abs(x-rho_v)) #find closest value to P0
+            a = np.where(EoSrho==i) # index of closest point to P0
+            index =a[0][0] #index of closest P0 (a outputs 2 dim. array)
+
+            p1 = EoSP[index]
+            rho1 = EoSrho[index]
+
+            if rho > EoSrho[index]:
+                p2 = EoSP[index+1]
+                rho2 = EoSrho[index+1]
+                f = findXPoint(p1,p2,rho1,rho2,rho_v)
+                # f2 = interp1d([p1,p2],[rho1,rho2])
+
+            elif rho < EoSrho[index]:
+                p2 = EoSP[index-1]
+                rho2 = EoSrho[index-1]
+                f = findXPoint(p2,p1,rho2,rho1,rho_v)
+
+            elif rho == EoSrho[index]:
+                f = EoSP[index]
+
+            return f
         elif b==2:
-            EoSP = EoSP2
-            EoSrho = EoSrho2
-
-        i = min(EoSrho,key=lambda x:abs(x-rho)) #find closest value to P0
-        a = np.where(EoSrho==i) # index of closest point to P0
-        index =a[0][0] #index of closest P0 (a outputs 2 dim. array)
-
-        p1 = EoSP[index]
-        rho1 = EoSrho[index]
-
-        if rho > EoSrho[index]:
-            p2 = EoSP[index+1]
-            rho2 = EoSrho[index+1]
-            f = findXPoint(p1,p2,rho1,rho2,rho)
-            # f2 = interp1d([p1,p2],[rho1,rho2])
-
-        elif rho < EoSrho[index]:
-            p2 = EoSP[index-1]
-            rho2 = EoSrho[index-1]
-            f = findXPoint(p2,p1,rho2,rho1,rho)
-
-        elif rho == EoSrho[index]:
-            f = EoSP[index]
-
-        return f
+            return (1/3)*(rho_v - 4*B)
 
     def diff(x,r):
         P = x[0]
@@ -207,12 +207,13 @@ for i in range(len(rho)):
     M = np.append(M,sol[1])
     comp = np.append(comp,sol[5])
 
+
 fig1 = plt.figure(1)
 plt.ylabel('dimensionaless M')
 plt.xlabel('dimensionaless R')
 plt.plot(R, M,'.' ,color='black')
 
-fig1 = plt.figure(2)
+fig2 = plt.figure(2)
 plt.plot(R, np.power(comp,-1),'.')
 plt.axhline(y=4/9,color='green',linestyle = 'dashed')
 plt.legend(['2 Step','Buchdahl limit'])
@@ -222,3 +223,4 @@ plt.ylim([0,4/9 +0.1 ])
 plt.grid()
 
 plt.show()
+
