@@ -190,7 +190,7 @@ def EoS2FandMIT(rho_0, y1):
 
 y1 = 10
 
-rho1 = np.linspace(10**(-8),10**(-7),5,endpoint=True)
+rho1 = np.linspace(10**(-8),10**(-7),10,endpoint=True)
 rho = np.array([])
 for i in range(0,9):
     k = rho1*(10**i)
