@@ -1,4 +1,5 @@
 import numpy as np
+from numpy.core.function_base import linspace
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
 from scipy.integrate import quad
@@ -7,7 +8,6 @@ import numpy as np
 
 # we want core made of dark matter (interacting fermi EoS) and rest of the star is made of quark matter or fermi (diff interaction)
 # define the core by density 
-
 
 pi = np.pi
 B = (145)**4
@@ -177,7 +177,7 @@ def EoS2(rho_0, y1 ,y2):
             rho_val = rho_array[0:i]
 
             comp = R/M
-            print('Star found with R= ',R,'& M=',M, 'Compactness(R/M) = ',(R)/(M),'(1 Step Profile) with',len(r_array),'steps')
+            print('Star found with R= ',R,'& M=',M, 'Compactness(R/M) = ',(R)/(M),'(2 Step Profile) with',len(r_array),'steps')
             break
 
         rho = Rho4P(P[-1],choose(rho_array[-1]))
@@ -187,3 +187,44 @@ def EoS2(rho_0, y1 ,y2):
 
         
     return R,M,r_val,P_val,m_val,comp
+
+y1 = 10
+y2 = 1e-2
+
+rho1 = np.linspace(10**(-8),10**(-7),5,endpoint=True)
+rho = np.array([])
+for i in range(0,9):
+    k = rho1*(10**i)
+    rho = np.append(rho,k)
+
+R = np.array([])
+M = np.array([])
+comp = np.array([])
+
+for i in range(len(rho)):
+    sol = EoS2(rho[i], y1 ,y2)
+    R = np.append(R,sol[0])
+    M = np.append(M,sol[1])
+    comp = np.append(comp,sol[5])
+
+fig1 = plt.figure(1)
+plt.title('Double log')
+plt.ylabel('dimensionaless log M')
+plt.xlabel('dimensionaless log R')
+plt.loglog(R, M,'.' ,color='black')
+
+fig2 = plt.figure(2)
+plt.ylabel('dimensionaless M')
+plt.xlabel('dimensionaless R')
+plt.plot(R, M,'.' ,color='black')
+
+fig3 = plt.figure(3)
+plt.plot(R, np.power(comp,-1),'.')
+plt.axhline(y=4/9,color='green',linestyle = 'dashed')
+plt.legend(['2 Step','Buchdahl limit'])
+plt.xlabel('R')
+plt.ylabel('M/R')
+plt.ylim([0,4/9 +0.1 ])
+plt.grid()
+
+plt.show()
