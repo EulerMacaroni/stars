@@ -7,8 +7,8 @@ from functions import findXPoint, minP
 rho1_array = np.array([]) 
 rho2_array = np.array([]) 
 pi = np.pi
-B = 1e-7
-m_f = 100000
+B = 1/4
+m_f = 1
 Mp = 1.3394 * (10**-1)
 G = Mp**(-2)
 # G =1
@@ -17,7 +17,8 @@ b = (Mp)/(m_f**2)
 x1 = np.sqrt(B)
 x2 = 4*B
 x3 = m_f**4
-
+quark = True
+DM = True
 
 def EosRho(k):
     return (1/(pi**2))*(k**2)*(np.sqrt(m_f**2 + k**2))
@@ -30,7 +31,8 @@ def intTerm(y,z):
 
 
 def TOVmix(rho_01,rho_02,y):
-
+    global quark
+    global DM
     kmin = 0
     kmax = np.array([])
     k1 = np.linspace(1e-150,1e-149,500,endpoint=True)
@@ -115,16 +117,23 @@ def TOVmix(rho_01,rho_02,y):
         P1 = x[0]
         P2 = x[1]
         m  = x[2]
+        
 
-        k01 = (G*rho1)/(r**2)
-        k11 = 1 + (P1/rho1)
-        k21 = m + 4*pi*(r**3)*(P1+P2)
-        k31 = (1 - (2*G*m)/r)**(-1)
+        if quark:
+            k01 = (G*rho1)/(r**2)
+            k11 = 1 + (P1/rho1)
+            k21 = m + 4*pi*(r**3)*(P1+P2)
+            k31 = (1 - (2*G*m)/r)**(-1)
+        else:
+            k01, k11, k21, k31 = 0,0,0,0
 
-        k02 = (G*rho2)/(r**2)
-        k12 = 1 + (P2/rho2)
-        k22 = m + 4*pi*(r**3)*(P1+P2)
-        k32 = (1 - (2*G*m)/r)**(-1)
+        if DM:
+            k02 = (G*rho2)/(r**2)
+            k12 = 1 + (P2/rho2)
+            k22 = m + 4*pi*(r**3)*(P1+P2)
+            k32 = (1 - (2*G*m)/r)**(-1)
+        else:
+            k02, k12, k22, k32 = 0,0,0,0
 
         dP1dr = -(k01)*(k11*k21*k31) 
         dP2dr = -(k02)*(k12*k22*k32) 
@@ -139,7 +148,7 @@ def TOVmix(rho_01,rho_02,y):
 
     y0 = [P01,P02,0]
 
-    limit = [P01*1e-7,P02*1e-7]
+    limit = [P01*1e-6,P02*1e-6]
     tau = 1e-10
     r_int = 1e-10
 
@@ -196,14 +205,22 @@ def TOVmix(rho_01,rho_02,y):
             print('Star found for Two EoS with',len(r_val),'steps')
 
             break
-        
-        rho1 = mitbagmodel4P(P1[-1])
-        rho2 = Rho4P(P2[-1])
-        if rho2 <= 0:
-            rho2 = EoSrho[0]
-        if P2[-1] <= 0:
-            print(r)
-            input(rho2)
+        if quark:
+            rho1 = mitbagmodel4P(P1[-1]) 
+        else:
+            rho1 = 0
+        if DM:
+            rho2 = Rho4P(P2[-1])
+        else:
+            rho2 = 0
+        if P1[-1] < 0:
+            P1[-1] = 0
+            rho1 = 0
+            quark = False
+        if P2[-1] < 0:
+            P2[-1] = 0
+            rho2 = 0
+            DM = False
         # print("1:", rho1, P1[-1])
         # print("2:", rho2, P2[-1])
         tau  = tau*1.03
@@ -227,7 +244,7 @@ def TOVmix(rho_01,rho_02,y):
 #     R_array.append(R)
 #     M_array.append(M)
 
-sol = TOVmix(1e-4,1e-4,1)
+sol = TOVmix(10,10,1)
 R = sol[0]
 M = sol[1]
 r = sol[2]
