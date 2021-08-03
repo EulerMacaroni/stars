@@ -9,7 +9,7 @@ import numpy as np
 # define the core by density 
 
 pi = np.pi
-B = (145)**4
+B = ((1)**4)/4
 m_f = 1
 Mp = 1.3394 * (10**-1)
 # G = Mp**(-2)
@@ -132,12 +132,12 @@ def EoS2FandMIT(rho_0, y1,r_c):
 
     def choose(r):
         if r <= r_c:
-            return 1
-        else:
             return 2
+        else:
+            return 1
 
     rho = rho_0
-    P0 = P4Rho(rho,1)
+    P0 = P4Rho(rho,2)
 
     x0 = [P0,0]
     int_P = P0
@@ -188,7 +188,7 @@ def EoS2FandMIT(rho_0, y1,r_c):
     return R,M,r_val,P_val,m_val,comp
 
 y1 = 10
-r_c = 5
+r_c = 1
 
 rho1 = np.linspace(10**(-8),10**(-7),10,endpoint=True)
 rho = np.array([])
