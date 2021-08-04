@@ -12,8 +12,8 @@ pi = np.pi
 B = ((1)**4)/4
 m_f = 1
 Mp = 1.3394 * (10**-1)
-# G = Mp**(-2)
-G =1
+G = Mp**(-2)
+# G =1
 a = (Mp**3)/(m_f**4)
 b = (Mp)/(m_f**2)
 x1 = np.sqrt(B)
@@ -190,12 +190,13 @@ def EoS2FandMIT(rho_0, y1,r_c):
 y1 = 10
 r_c = 1
 
-rho1 = np.linspace(10**(-8),10**(-7),10,endpoint=True)
-rho = np.array([])
-for i in range(0,9):
-    k = rho1*(10**i)
-    rho = np.append(rho,k)
+# rho1 = np.linspace(10**(-8),10**(-7),10,endpoint=True)
+# rho = np.array([])
+# for i in range(0,9):
+#     k = rho1*(10**i)
+#     rho = np.append(rho,k)
 
+rho = np.linspace(1.1,10,100)
 R = np.array([])
 M = np.array([])
 comp = np.array([])
@@ -205,7 +206,6 @@ for i in range(len(rho)):
     R = np.append(R,sol[0])
     M = np.append(M,sol[1])
     comp = np.append(comp,sol[5])
-
 
 fig1 = plt.figure(1)
 plt.ylabel('dimensionaless M')
