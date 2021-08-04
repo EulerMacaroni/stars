@@ -132,12 +132,12 @@ def EoS2FandMIT(rho_0, y1,r_c):
 
     def choose(r):
         if r <= r_c:
-            return 2
-        else:
             return 1
+        else:
+            return 2
 
     rho = rho_0
-    P0 = P4Rho(rho,2)
+    P0 = P4Rho(rho,1)
 
     x0 = [P0,0]
     int_P = P0
@@ -185,7 +185,7 @@ def EoS2FandMIT(rho_0, y1,r_c):
         x0 = [P[-1],m[-1]]
 
         
-    return R,M,r_val,P_val,m_val,comp
+    return R,M,r_val,P_val,m_val,comp,rho_val
 
 y1 = 10
 r_c = 1
